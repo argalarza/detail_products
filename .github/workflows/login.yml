@@ -3,13 +3,13 @@ name: Deploy to EC2
 on:
   push:
     branches:
-      - main  # Asegúrate de cambiar essto sssi usas otra rama principal.
+      - main  # Asegúrate de cambiar esto si usas otra rama principal.
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    steps: 
+    steps:
     - name: 🚀 Checkout del código
       uses: actions/checkout@v3
 
@@ -60,13 +60,13 @@ jobs:
 
           # Clonar o actualizar el código fuente
           echo "📦 Clonando o actualizando código fuente..."
-          if [ -d "detail-products-service" ]; then
-            cd detail-products-service
+          if [ -d "$APP_DIR/detail_products" ]; then
+            cd $APP_DIR/detail_products
             git reset --hard
             git pull origin main
           else
-            git clone -b main https://github.com/argalarza/detail_products.git
-            cd detail-products-service
+            git clone -b main https://github.com/argalarza/detail_products.git $APP_DIR/detail_products
+            cd $APP_DIR/detail_products
           fi
 
           # Crear archivo .env
