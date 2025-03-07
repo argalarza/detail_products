@@ -1,0 +1,19 @@
+services:
+  detail-products-service:
+    build: .
+    ports:
+      - "3009:3009"
+    environment:
+     SQL_DB_HOST: "${SQL_DB_HOST}"
+     SQL_DB_PORT: "${SQL_DB_PORT}"
+     SQL_DB_USER: "${SQL_DB_USER}"
+     SQL_DB_PASSWORD: "${SQL_DB_PASSWORD}"
+     SQL_DB_NAME: "${SQL_DB_NAME}"
+
+    networks:
+      - my_global_network  # Conectamos a la red externa
+    restart: unless-stopped
+
+networks:
+  my_global_network:
+    external: true  # Usamos la red creada manualmente
